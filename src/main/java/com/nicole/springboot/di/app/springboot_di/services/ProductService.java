@@ -13,9 +13,10 @@ public class ProductService {
     public List<Product> findAll(){
         
         return repository.findAll().stream().map(p -> {
-            Double priceImp = p.getPrice() * 1.25d;
-            p.setPrice(priceImp.longValue());
-            return p;
+            Double priceImpost = p.getPrice() * 1.25d;
+            Product newProduct = new Product(p.getId(),p.getName(),priceImpost.longValue()); // Cumplir con el principio de inmutabilidad, ya que el objeto es distinto
+            //p.setPrice(priceImpost.longValue());
+            return newProduct;
         }).collect(Collectors.toList());
     }
 
